@@ -1,8 +1,8 @@
 <template>
-  <main class="container-fluid container-main">
+  <v-main>
     <BotAlerts />
     <router-view />
-  </main>
+  </v-main>
 </template>
 
 <script lang="ts">

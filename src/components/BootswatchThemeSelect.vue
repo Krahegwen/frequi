@@ -24,23 +24,21 @@
         >{{ theme.name }}{{ theme.dark ? ' [dark]' : '' }}</b-dropdown-item-button
       >
     </b-nav-item-dropdown>
-    <b-link v-else variant="outline-primary" class="nav-link" @click="toggleNight">
-      <ThemeLightDark :size="16" />
-    </b-link>
+    <v-btn v-else icon small @click="toggleNight">
+      <v-icon small>brightness_medium</v-icon>
+    </v-btn>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
 import axios from 'axios';
-import ThemeLightDark from 'vue-material-design-icons/Brightness6.vue';
 import { themeList } from '@/shared/themes';
 import { mapActions } from 'vuex';
 import { FTHTMLStyleElement } from '@/types/styleElement';
 
 export default Vue.extend({
   name: 'BootswatchThemeSelect',
-  components: { ThemeLightDark },
   props: {
     simple: {
       type: Boolean,

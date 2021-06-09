@@ -1,8 +1,8 @@
 <template>
-  <div id="app" class="d-flex flex-column vh-100">
+  <v-app>
     <Header />
-    <Body class="flex-fill overflow-auto" />
-  </div>
+    <Body />
+  </v-app>
 </template>
 
 <script lang="ts">

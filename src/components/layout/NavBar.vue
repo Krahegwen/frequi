@@ -1,49 +1,43 @@
 <template>
-  <div>
-    <b-navbar toggleable="sm" type="dark" variant="primary">
-      <b-navbar-brand exact to="/">
-        <img class="logo" src="@/assets/freqtrade-logo.png" alt="Home Logo" />
-        <span class="navbar-brand-title d-sm-none d-md-inline">Freqtrade UI</span>
-      </b-navbar-brand>
-
-      <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
-
-      <b-collapse id="nav-collapse" is-nav>
-        <b-navbar-nav>
-          <b-nav-item to="/trade">Trade</b-nav-item>
-          <!-- <b-nav-item to="/graph">Graph</b-nav-item> -->
-          <b-nav-item to="/dashboard">Dashboard</b-nav-item>
-          <BootswatchThemeSelect />
-        </b-navbar-nav>
-        <!-- Right aligned nav items -->
-        <b-navbar-nav class="ml-auto">
-          <li class="nav-item text-secondary mr-2">
-            <b-nav-text class="verticalCenter small mr-2">
-              {{ botName }}
-            </b-nav-text>
-            <b-nav-text class="verticalCenter">
-              {{ isBotOnline ? 'Online' : 'Offline' }}
-            </b-nav-text>
-          </li>
-          <li v-if="loggedIn" class="nav-item">
-            <b-nav-item-dropdown right>
-              <template #button-content>
-                <b-avatar size="2em" button>FT</b-avatar>
-              </template>
-              <b-checkbox v-model="layoutLockedLocal" class="pl-5">Lock layout</b-checkbox>
-              <b-dropdown-item to="/settings">Settings</b-dropdown-item>
-              <b-dropdown-item @click="resetDynamicLayout">Reset Layout</b-dropdown-item>
-              <b-dropdown-item to="/" @click.native="logout()">Sign Out</b-dropdown-item>
-            </b-nav-item-dropdown>
-          </li>
-          <li v-else>
-            <!-- should open Modal window! -->
-            <LoginModal />
-          </li>
-        </b-navbar-nav>
-      </b-collapse>
-    </b-navbar>
-  </div>
+  <v-app-bar app color="primary" dense>
+    <div class="d-flex align-center">
+      <v-img
+        alt="Home Logo"
+        class="shrink mr-2"
+        contain
+        src="@/assets/freqtrade-logo.png"
+        transition="scale-transition"
+        width="40"
+        height="30px"
+      />
+    </div>
+    <v-toolbar-title>Freqtrade UI</v-toolbar-title>
+    <v-btn text small plain class="ml-2" to="/trade"> Trade </v-btn>
+    <v-btn text small plain to="/dashboard"> Dashboard </v-btn>
+    <BootswatchThemeSelect />
+    <v-spacer></v-spacer>
+    <div class="caption text--disabled mr-2">
+      {{ botName }}
+    </div>
+    <div class="text--disabled">
+      {{ isBotOnline ? 'Online' : 'Offline' }}
+    </div>
+    <v-menu v-if="loggedIn" offset-y>
+      <template #activator="{ on, attrs }">
+        <v-btn v-bind="attrs" text v-on="on">
+          <v-avatar size="2em" color="grey darken-1">FT</v-avatar>
+          <v-icon>mdi-dots-vertical</v-icon>
+        </v-btn>
+      </template>
+      <v-list light>
+        <v-checkbox v-model="layoutLockedLocal" class="pl-5" label="Lock layout"></v-checkbox>
+        <v-list-item @click="resetDynamicLayout">Reset Layout</v-list-item>
+        <v-list-item to="/settings">Settings</v-list-item>
+        <v-list-item to="/" @click.native="logout()">Sign Out</v-list-item>
+      </v-list>
+    </v-menu>
+    <LoginModal v-else />
+  </v-app-bar>
 </template>
 
 <script lang="ts">

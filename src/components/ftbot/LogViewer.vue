@@ -38,6 +38,6 @@ textarea {
   width: 100%;
   min-height: 6em;
   resize: none;
-  font-size: $fontsize-small;
+  font-size: 0.9rem;
 }
 </style>

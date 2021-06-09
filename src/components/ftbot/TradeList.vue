@@ -205,7 +205,7 @@ export default class TradeList extends Vue {
   padding: 0 0.2em;
 }
 .table-sm {
-  font-size: $fontsize-small;
+  font-size: 0.9rem;
 }
 .btn-xs {
   padding: 0.1rem 0.25rem;
